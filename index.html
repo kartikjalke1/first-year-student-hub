@@ -6,16 +6,17 @@
 <style>
 :root{--bg:#0b1020;--panel:#121a2e;--panel2:#18233b;--line:#263552;--text:#eef3ff;--muted:#9eacc8;--blue:#6ea8fe;--cyan:#57d6d0;--green:#54d69a;--red:#ff7185;--gold:#f4c76b}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#18264a 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 system-ui,Segoe UI,Arial}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650;background:var(--blue);color:#081326}button.secondary{background:#263653;color:var(--text);border:1px solid #3b4e70}button.danger{background:#51283a;color:#ffdce3;border:1px solid #8b4059}button:disabled{opacity:.5;cursor:not-allowed}
-header{display:flex;align-items:center;justify-content:space-between;padding:17px max(4vw,18px);border-bottom:1px solid var(--line);background:#0b1020dd;position:sticky;top:0;z-index:2;backdrop-filter:blur(12px)}
-.brand{font-size:20px;font-weight:850;letter-spacing:.2px}.brand span{color:var(--cyan)}.tag{color:var(--muted);font-size:12px}
-main{max-width:1120px;margin:28px auto;padding:0 18px}.hero{padding:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,#182747,#111a2d);margin-bottom:22px}.hero h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}.hero p{margin:0;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.card h2,.card h3{margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:12px}.pill{display:inline-block;padding:4px 9px;border-radius:99px;background:#203454;color:#b9d5ff;font-size:12px;margin:2px}.status{color:var(--gold)}.good{color:var(--green)}.bad{color:var(--red)}
-input,select,textarea{width:100%;padding:11px 12px;margin:5px 0 12px;border-radius:10px;border:1px solid #344665;background:#0c1426;color:var(--text);outline:none}textarea{min-height:90px;resize:vertical}label{font-size:13px;color:#c4d0e6}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650;background:var(--blue);color:#081326}button.secondary{background:#263653;color:var(--text);border:1px solid #3b4e70}button.danger{background:#51283a;color:#ffdce3;border:1px solid #8b4059}
+header{display:flex;align-items:center;justify-content:space-between;padding:17px max(4vw,18px);border-bottom:1px solid var(--line);background:#0b1020dd;position:sticky;top:0;z-index:2}
+.brand{font-size:20px;font-weight:850}.brand span{color:var(--cyan)}.tag,.muted{color:var(--muted)}.tag,.small{font-size:12px}
+main{max-width:1120px;margin:28px auto;padding:0 18px}.hero{padding:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,#182747,#111a2d);margin-bottom:22px}.hero h1{margin:0 0 8px;font-size:clamp(25px,4vw,38px)}.hero p{margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.card h2,.card h3{margin:0 0 12px}
+input,select,textarea{width:100%;padding:11px 12px;margin:5px 0 12px;border-radius:10px;border:1px solid #344665;background:#0c1426;color:var(--text)}textarea{min-height:90px}label{font-size:13px;color:#c4d0e6}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button.active{background:var(--cyan);color:#06201f}
-.project{display:flex;flex-direction:column;gap:10px}.project h3{margin:0}.project p{margin:0;color:var(--muted);white-space:pre-wrap}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.actions button{flex:1}
+.project{display:flex;flex-direction:column;gap:10px}.project h3,.project p{margin:0}.project p{color:var(--muted);white-space:pre-wrap}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.actions button{flex:1}
 .hidden{display:none!important}.notice{padding:11px 14px;border-radius:10px;background:#172944;border:1px solid #31496d;margin:12px 0}.error{background:#3a1d2a;border-color:#71374b;color:#ffdce3}.success{background:#12352f;border-color:#246b5c;color:#c9fff0}
 .list{display:grid;gap:10px}.listitem{padding:12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.pill{display:inline-block;padding:4px 9px;border-radius:99px;background:#203454;color:#b9d5ff;font-size:12px}
 footer{text-align:center;color:var(--muted);padding:35px 15px;font-size:12px}
 @media(max-width:600px){header{padding:13px}.hero{padding:19px}main{margin:18px auto}.row{display:block}}
 </style>
@@ -23,94 +24,109 @@ footer{text-align:center;color:var(--muted);padding:35px 15px;font-size:12px}
 <body>
 <header><div><div class="brand">Project<span>Hub</span></div><div class="tag">FIRST YEAR • ELECTRONICS & COMPUTERS</div></div><div class="row" style="flex:0;align-items:center"><span id="who" class="small muted"></span><button id="logoutBtn" class="secondary hidden">Log out</button></div></header>
 <main>
-<section class="hero"><h1>Build together. Learn together.</h1><p>A shared project community for first-year students. Discover projects, register your interest, collaborate and receive certificates.</p></section>
+<section class="hero"><h1>Build together. Learn together.</h1><p>A shared project community for first-year students. Discover projects, collaborate and receive certificates.</p></section>
 <div id="message" class="notice hidden"></div>
 <section id="authView" class="grid">
  <div class="card"><h2>Welcome back</h2><p class="muted small">Sign in with your username and password.</p>
- <label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. kartik123">
- <label>Password</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Password">
+ <label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. kartik123"><label>Password</label><input id="loginPass" type="password" autocomplete="current-password">
  <button id="loginBtn" style="width:100%">Log in</button></div>
- <div class="card"><h2>Request student access</h2><p class="muted small">Create an account. The administrator must approve it before you can access projects.</p>
- <label>Your name</label><input id="regName" placeholder="Full name">
- <label>Choose username</label><input id="regUser" autocomplete="username" placeholder="Unique username">
- <label>Create password</label><input id="regPass" type="password" autocomplete="new-password" placeholder="At least 6 characters">
- <label>Branch</label><select id="regBranch"><option>Electronics & Computers</option><option>Computer</option><option>Electronics</option><option>Other</option></select>
- <button id="registerBtn" style="width:100%">Send approval request</button></div>
+ <div class="card"><h2>Request student access</h2><p class="muted small">The administrator must approve your account.</p>
+ <label>Your name</label><input id="regName" placeholder="Full name"><label>Choose username</label><input id="regUser" autocomplete="username" placeholder="Unique username"><label>Create password</label><input id="regPass" type="password" autocomplete="new-password" placeholder="At least 6 characters">
+ <label>Branch</label><select id="regBranch"><option>Electronics & Computers</option><option>Computer</option><option>Electronics</option><option>Other</option></select><button id="registerBtn" style="width:100%">Send approval request</button></div>
 </section>
-<section id="pendingView" class="card hidden"><h2>Approval pending</h2><p>Your account request has been sent to the administrator. You can log in after approval.</p></section>
+<section id="pendingView" class="card hidden"><h2>Approval pending</h2><p>Your account request has been sent. You can use the app after approval.</p></section>
 <section id="appView" class="hidden">
- <div class="row"><div><h2 style="margin:0">Project board</h2><div class="muted small">Live updates from the shared cloud database</div></div><div id="adminBadge" class="pill hidden">ADMIN</div></div>
- <div class="tabs"><button class="active" data-tab="projectsTab">Projects</button><button data-tab="certTab">My certificates</button><button id="adminTabBtn" data-tab="adminTab" class="hidden secondary">Admin panel</button></div>
+ <div class="row"><div><h2 id="dashboardTitle" style="margin:0">Student Dashboard</h2><div class="muted small">Your ProjectHub workspace</div></div><div id="adminBadge" class="pill hidden">ADMIN</div></div>
+ <div class="tabs" id="studentTabs">
+  <button class="active" data-tab="projectsTab">Available Projects</button>
+  <button data-tab="myProjectsTab">My Projects</button>
+  <button data-tab="profileTab">My Profile</button>
+  <button data-tab="certTab">My Certificates</button>
+  <button id="adminTabBtn" data-tab="adminTab" class="hidden secondary">Admin Panel</button>
+ </div>
  <div id="projectsTab"><div id="projectGrid" class="grid"></div></div>
- <div id="certTab" class="hidden card"><h2>My certificates</h2><div id="myCertificates" class="list muted">No certificates yet.</div></div>
+ <div id="myProjectsTab" class="hidden card"><h2>My Projects</h2><div id="myProjects" class="list muted">Loading your project participation...</div></div>
+ <div id="profileTab" class="hidden card"><h2>My Profile</h2><label>Name</label><input id="profileName"><label>Username</label><input id="profileUsername" disabled><label>Branch</label><select id="profileBranch"><option>Electronics & Computers</option><option>Computer</option><option>Electronics</option><option>Other</option></select><button id="saveProfileBtn">Save profile</button></div>
+ <div id="certTab" class="hidden card"><h2>My Certificates</h2><div id="myCertificates" class="list muted">No certificates yet.</div></div>
  <div id="adminTab" class="hidden">
   <div class="grid">
-   <div class="card"><h2>Create a project</h2>
-    <label>Project title</label><input id="pTitle" placeholder="e.g. Smart classroom assistant">
-    <label>Category</label><select id="pCategory"><option>Electronics</option><option>Computer</option><option>Electronics & Computers</option></select>
-    <label>Description / required skills</label><textarea id="pDescription" placeholder="Explain the idea, goals and skills needed..."></textarea>
-    <label>Deadline (optional)</label><input id="pDeadline" type="date">
-    <button id="addProjectBtn" style="width:100%">Publish project</button>
-   </div>
-   <div class="card"><h2>Approval requests</h2><div id="pendingUsers" class="list muted">No pending requests.</div></div>
+   <div class="card"><h2>Create a Project</h2><label>Project title</label><input id="pTitle" placeholder="e.g. Smart classroom assistant"><label>Category</label><select id="pCategory"><option>Electronics</option><option>Computer</option><option>Electronics & Computers</option></select><label>Description / required skills</label><textarea id="pDescription"></textarea><label>Deadline (optional)</label><input id="pDeadline" type="date"><button id="addProjectBtn" style="width:100%">Publish project</button></div>
+   <div class="card"><h2>Approval Requests</h2><div id="pendingUsers" class="list muted">No pending requests.</div></div>
   </div>
-  <div class="card" style="margin-top:15px"><h2>Manage students</h2><div id="allUsers" class="list muted">Loading students...</div></div>
-  <div class="card" style="margin-top:15px"><h2>Project participation & certificates</h2><p class="muted small">Choose a project to see interested students and upload an individual certificate.</p><select id="manageProject"><option value="">Select project</option></select><div id="participants" class="list"></div></div>
+  <div class="card" style="margin-top:15px"><h2>Manage Students</h2><div id="allUsers" class="list muted">Loading students...</div></div>
+  <div class="card" style="margin-top:15px"><h2>Project Participation & Certificates</h2><p class="muted small">Choose a project to see students who responded and upload an individual certificate.</p><select id="manageProject"><option value="">Select project</option></select><div id="participants" class="list"></div></div>
  </div>
 </section>
-</main>
-<footer>ProjectHub • Student collaboration workspace</footer>
+</main><footer>ProjectHub • Student collaboration workspace</footer>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, updateDoc, deleteDoc, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,setDoc,getDoc,collection,addDoc,query,where,onSnapshot,updateDoc,serverTimestamp,orderBy} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-/* 1) Replace these values with your Firebase project's Web App config. */
-const firebaseConfig = {
-  apiKey: "AIzaSyDCfB4mF80vHlW1FtQIbuo3o9ESRtvlMLc",
-  authDomain: "new-projecthub.firebaseapp.com",
-  projectId: "new-projecthub",
-  storageBucket: "new-projecthub.firebasestorage.app",
-  messagingSenderId: "901069289222",
-  appId: "1:901069289222:web:2f19a4ec67ed8294e41087"
-};
-/* 2) After creating your first account, copy its Firebase Auth UID into ADMIN_UID.
-   Never let a public signup choose or edit this value. */
-const ADMIN_UID = "wmPUWhoSpycD4ReHIVvh8caDmfq2";
-
-const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app), storage=getStorage(app);
+const firebaseConfig={apiKey:"AIzaSyDCfB4mF80vHlW1FtQIbuo3o9ESRtvlMLc",authDomain:"new-projecthub.firebaseapp.com",projectId:"new-projecthub",storageBucket:"new-projecthub.firebasestorage.app",messagingSenderId:"901069289222",appId:"1:901069289222:web:2f19a4ec67ed8294e41087"};
+const ADMIN_UID="wmPUWhoSpycD4ReHIVvh8caDmfq2";
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
 const $=id=>document.getElementById(id);
-let currentUser=null, profile=null, projects=[], unsubProjects=null;
-const usernameEmail=u=>{
-u=u.trim().toLowerCase();
-return u.includes("@")?u:u.replace(/[^a-z0-9._-]/g,"")+"@projecthub-login.invalid";
-};
-function msg(t,kind=""){ $("message").textContent=t;$("message").className="notice "+kind; }
-function clearMsg(){ $("message").className="notice hidden"; }
-function show(id,on=true){$(id).classList.toggle("hidden",!on)}
+let currentUser=null,profile=null,projects=[],isAdmin=false,unsubProjects=null,unsubUsers=null,unsubResponses=null,unsubCertificates=null;
+const usernameEmail=u=>{u=u.trim().toLowerCase();return u.includes("@")?u:u.replace(/[^a-z0-9._-]/g,"")+"@projecthub-login.invalid";};
+function msg(t,kind=""){ $("message").textContent=t;$("message").className="notice "+kind;}
+function clearMsg(){$("message").className="notice hidden";}
+function show(id,on=true){$(id).classList.toggle("hidden",!on);}
 function safe(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function setTab(id){["projectsTab","certTab","adminTab"].forEach(x=>show(x,x===id));document.querySelectorAll(".tabs button[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));}
-document.querySelectorAll(".tabs button[data-tab]").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
-$("registerBtn").onclick=async()=>{try{clearMsg();const name=$("regName").value.trim(),u=$("regUser").value.trim().toLowerCase(),p=$("regPass").value;if(!name||u.length<3||p.length<6)throw Error("Enter your name, a username (at least 3 characters) and a password (at least 6 characters).");const cred=await createUserWithEmailAndPassword(auth,usernameEmail(u),p);await setDoc(doc(db,"users",cred.user.uid),{name,username:u,branch:$("regBranch").value,status:"pending",role:"student",createdAt:serverTimestamp()});msg("Request submitted. Wait for admin approval.","success");}catch(e){msg(e.message,"error");}};
-$("loginBtn").onclick=async()=>{try{clearMsg();await signInWithEmailAndPassword(auth,usernameEmail($("loginUser").value),$("loginPass").value);}catch(e){msg("Login failed. Check username/password, or ask the admin whether your account is approved.","error");}};
+function setTab(id){["projectsTab","myProjectsTab","profileTab","certTab","adminTab"].forEach(x=>show(x,x===id));document.querySelectorAll(".tabs button[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));}
+document.querySelectorAll(".tabs button[data-tab]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.tab==="adminTab"&&!isAdmin)return;setTab(b.dataset.tab);}));
+function stopListeners(){[unsubProjects,unsubUsers,unsubResponses,unsubCertificates].forEach(fn=>{if(fn)fn();});unsubProjects=unsubUsers=unsubResponses=unsubCertificates=null;}
+$("registerBtn").onclick=async()=>{try{clearMsg();const name=$("regName").value.trim(),u=$("regUser").value.trim().toLowerCase(),p=$("regPass").value;if(!name||u.length<3||p.length<6)throw Error("Enter your name, username (at least 3 characters) and password (at least 6 characters).");const cred=await createUserWithEmailAndPassword(auth,usernameEmail(u),p);await setDoc(doc(db,"users",cred.user.uid),{name,username:u,branch:$("regBranch").value,status:"pending",role:"student",createdAt:serverTimestamp()});msg("Request submitted. Wait for admin approval.","success");}catch(e){msg(e.message,"error");}};
+$("loginBtn").onclick=async()=>{try{clearMsg();await signInWithEmailAndPassword(auth,usernameEmail($("loginUser").value),$("loginPass").value);}catch(e){msg("Login failed. Check username/password and approval status.","error");}};
 $("logoutBtn").onclick=()=>signOut(auth);
-onAuthStateChanged(auth,async user=>{currentUser=user;show("logoutBtn",!!user);show("authView",!user);show("pendingView",false);show("appView",false);$("who").textContent="";if(unsubProjects){unsubProjects();unsubProjects=null;}if(!user)return;
- try{const snap=await getDoc(doc(db,"users",user.uid));if(!snap.exists()){msg("Your profile was not found. Contact the administrator.","error");return;}profile=snap.data();$("who").textContent=profile.name||profile.username;
- if(profile.status!=="approved"&&profile.role!=="admin"){show("pendingView");return;}
- show("appView");const isAdmin=user.uid===ADMIN_UID||profile.role==="admin";show("adminBadge",isAdmin);show("adminTabBtn",isAdmin);
- const q=query(collection(db,"projects"),orderBy("createdAt","desc"));unsubProjects=onSnapshot(q,s=>{projects=s.docs.map(d=>({id:d.id,...d.data()}));renderProjects();if(isAdmin)renderAdmin();},e=>msg(e.message,"error"));
- if(isAdmin)renderAdmin();
+onAuthStateChanged(auth,async user=>{
+ currentUser=user;profile=null;isAdmin=false;stopListeners();show("logoutBtn",!!user);show("authView",!user);show("pendingView",false);show("appView",false);$("who").textContent="";if(!user)return;
+ try{
+  const snap=await getDoc(doc(db,"users",user.uid));if(!snap.exists()){msg("Profile not found. Contact the administrator.","error");return;}
+  profile=snap.data();isAdmin=(user.uid===ADMIN_UID&&profile.role==="admin")||profile.role==="admin";
+  $("who").textContent=profile.name||profile.username||"";
+  if(!isAdmin&&profile.status!=="approved"){show("pendingView");return;}
+  show("appView");$("dashboardTitle").textContent=isAdmin?"Admin Dashboard":"Student Dashboard";show("adminBadge",isAdmin);show("adminTabBtn",isAdmin);
+  // Admin gets the Admin Panel tab; students never get its controls.
+  if(!isAdmin)setTab("projectsTab");else setTab("projectsTab");
+  unsubProjects=onSnapshot(query(collection(db,"projects"),orderBy("createdAt","desc")),s=>{
+   const seen=new Set();projects=s.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.title&&String(p.title).trim()).filter(p=>{const key=String(p.title).trim().toLowerCase()+"|"+String(p.category||"").trim().toLowerCase();if(seen.has(key))return false;seen.add(key);return true;});
+   renderProjects();renderMyProjects();if(isAdmin)renderAdminProjectOptions();
+  },e=>msg(e.message,"error"));
+  renderProfile();loadCertificates();
+  if(isAdmin)loadAdminUsers();
  }catch(e){msg(e.message,"error");}
 });
-function renderProjects(){const root=$("projectGrid");if(!projects.length){root.innerHTML='<div class="card muted">No projects published yet.</div>';return;}root.innerHTML=projects.map(p=>`<article class="card project"><div><span class="pill">${safe(p.category)}</span> ${p.deadline?`<span class="pill">Deadline: ${safe(p.deadline)}</span>`:""}</div><h3>${safe(p.title)}</h3><p>${safe(p.description)}</p><div class="actions"><button data-interest="${p.id}" data-value="interested">Interested</button><button class="secondary" data-interest="${p.id}" data-value="not_interested">Not interested</button></div></article>`).join("");root.querySelectorAll("[data-interest]").forEach(b=>b.onclick=()=>setInterest(b.dataset.interest,b.dataset.value));}
-async function setInterest(pid,value){try{await setDoc(doc(db,"projects",pid,"responses",currentUser.uid),{uid:currentUser.uid,name:profile.name,username:profile.username,choice:value,updatedAt:serverTimestamp()});msg(value==="interested"?"Your interest has been recorded.":"Your response has been recorded.","success");}catch(e){msg(e.message,"error");}}
-$("addProjectBtn").onclick=async()=>{try{await addDoc(collection(db,"projects"),{title:$("pTitle").value.trim(),category:$("pCategory").value,description:$("pDescription").value.trim(),deadline:$("pDeadline").value,createdBy:currentUser.uid,createdAt:serverTimestamp()});$("pTitle").value="";$("pDescription").value="";msg("Project published to all approved users.","success");}catch(e){msg(e.message,"error");}};
-async function renderAdmin(){if(currentUser.uid!==ADMIN_UID&&profile.role!=="admin")return;
- onSnapshot(query(collection(db,"users"),orderBy("createdAt","desc")),s=>{const users=s.docs.map(d=>({id:d.id,...d.data()}));$("pendingUsers").innerHTML=users.filter(u=>u.status==="pending").map(u=>`<div class="listitem"><div><b>${safe(u.name)}</b><div class="small muted">${safe(u.username)} • ${safe(u.branch)}</div></div><button data-approve="${u.id}">Approve</button></div>`).join("")||"No pending requests."; $("allUsers").innerHTML=users.filter(u=>u.role!=="admin").map(u=>`<div class="listitem"><div><b>${safe(u.name)}</b><div class="small muted">${safe(u.username)} • ${safe(u.status)}</div></div><button class="danger" data-remove="${u.id}">Remove access</button></div>`).join("")||"No students.";document.querySelectorAll("[data-approve]").forEach(b=>b.onclick=()=>updateDoc(doc(db,"users",b.dataset.approve),{status:"approved"}));document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>updateDoc(doc(db,"users",b.dataset.remove),{status:"removed"}));});
- $("manageProject").innerHTML='<option value="">Select project</option>'+projects.map(p=>`<option value="${p.id}">${safe(p.title)}</option>`).join("");
+function renderProjects(){
+ const root=$("projectGrid");if(!projects.length){root.innerHTML='<div class="card muted">No projects published yet.</div>';return;}
+ root.innerHTML=projects.map(p=>`<article class="card project"><div><span class="pill">${safe(p.category||"Project")}</span> ${p.deadline?`<span class="pill">Deadline: ${safe(p.deadline)}</span>`:""}</div><h3>${safe(p.title)}</h3><p>${safe(p.description||"")}</p><div class="actions"><button data-interest="${p.id}" data-value="interested">Interested</button><button class="secondary" data-interest="${p.id}" data-value="not_interested">Not interested</button></div></article>`).join("");
+ root.querySelectorAll("[data-interest]").forEach(b=>b.onclick=()=>setInterest(b.dataset.interest,b.dataset.value));
 }
-$("manageProject").onchange=async()=>{const pid=$("manageProject").value;if(!pid){$("participants").innerHTML="";return;}onSnapshot(collection(db,"projects",pid,"responses"),s=>{$("participants").innerHTML=s.docs.map(d=>{const r=d.data();return `<div class="listitem"><div><b>${safe(r.name)}</b><div class="small muted">${safe(r.username)} • ${safe(r.choice)}</div></div><label style="max-width:230px">Upload certificate<input type="file" accept="application/pdf,image/*" data-cert="${d.id}"></label></div>`}).join("")||"No responses yet.";document.querySelectorAll("[data-cert]").forEach(inp=>inp.onchange=async()=>{const f=inp.files[0];if(!f)return;try{const path=`certificates/${pid}/${inp.dataset.cert}/${Date.now()}_${f.name}`;const rr=ref(storage,path);await uploadBytes(rr,f);const url=await getDownloadURL(rr);await addDoc(collection(db,"users",inp.dataset.cert,"certificates"),{projectId:pid,projectTitle:projects.find(x=>x.id===pid)?.title||"Project",url,fileName:f.name,uploadedAt:serverTimestamp()});msg("Certificate uploaded to the student's account.","success");}catch(e){msg(e.message,"error");}});});};
-onAuthStateChanged(auth,user=>{if(!user)return;onSnapshot(collection(db,"users",user.uid,"certificates"),s=>{$("myCertificates").innerHTML=s.docs.map(d=>{const c=d.data();return `<div class="listitem"><b>${safe(c.projectTitle)}</b><a href="${safe(c.url)}" target="_blank" rel="noopener">Open certificate</a></div>`}).join("")||"No certificates yet.";});});
+async function setInterest(pid,value){try{await setDoc(doc(db,"projects",pid,"responses",currentUser.uid),{uid:currentUser.uid,name:profile.name||"",username:profile.username||"",choice:value,updatedAt:serverTimestamp()});msg("Your response has been recorded.","success");renderMyProjects();}catch(e){msg(e.message,"error");}}
+async function renderMyProjects(){
+ const root=$("myProjects");if(!currentUser||!projects.length){root.textContent="You have not participated in any projects yet.";return;}
+ try{const results=await Promise.all(projects.map(async p=>{const s=await getDoc(doc(db,"projects",p.id,"responses",currentUser.uid));return s.exists()?{...p,response:s.data()}:null;}));const mine=results.filter(Boolean);
+ root.innerHTML=mine.map(p=>`<div class="listitem"><div><b>${safe(p.title)}</b><div class="small muted">${safe(p.category||"")} • Response: ${safe(p.response.choice||"")}</div></div></div>`).join("")||"You have not responded to any projects yet.";
+ }catch(e){root.textContent=e.message;}
+}
+function renderProfile(){$("profileName").value=profile.name||"";$("profileUsername").value=profile.username||"";$("profileBranch").value=profile.branch||"Other";}
+$("saveProfileBtn").onclick=async()=>{try{const name=$("profileName").value.trim();if(!name)throw Error("Enter your name.");await updateDoc(doc(db,"users",currentUser.uid),{name,branch:$("profileBranch").value});profile.name=name;profile.branch=$("profileBranch").value;$("who").textContent=name;msg("Profile updated.","success");}catch(e){msg(e.message,"error");}};
+function loadCertificates(){if(unsubCertificates)unsubCertificates();unsubCertificates=onSnapshot(collection(db,"users",currentUser.uid,"certificates"),s=>{$("myCertificates").innerHTML=s.docs.map(d=>{const c=d.data();return `<div class="listitem"><div><b>${safe(c.projectTitle||"Project certificate")}</b><div class="small muted">${safe(c.fileName||"Certificate")}</div></div><a href="${safe(c.url)}" target="_blank" rel="noopener">Download / Open</a></div>`;}).join("")||"No certificates yet.";},e=>msg("Certificate access: "+e.message,"error"));}
+$("addProjectBtn").onclick=async()=>{if(!isAdmin){msg("Only the administrator can create projects.","error");return;}try{const title=$("pTitle").value.trim();if(!title)throw Error("Enter a project title.");await addDoc(collection(db,"projects"),{title,category:$("pCategory").value,description:$("pDescription").value.trim(),deadline:$("pDeadline").value,createdBy:currentUser.uid,createdAt:serverTimestamp()});$("pTitle").value="";$("pDescription").value="";msg("Project published.","success");}catch(e){msg(e.message,"error");}};
+function loadAdminUsers(){if(unsubUsers)unsubUsers();unsubUsers=onSnapshot(query(collection(db,"users"),orderBy("createdAt","desc")),s=>{
+ const users=s.docs.map(d=>({id:d.id,...d.data()}));
+ $("pendingUsers").innerHTML=users.filter(u=>u.role==="student"&&u.status==="pending").map(u=>`<div class="listitem"><div><b>${safe(u.name)}</b><div class="small muted">${safe(u.username)} • ${safe(u.branch)}</div></div><button data-approve="${u.id}">Approve</button></div>`).join("")||"No pending requests.";
+ $("allUsers").innerHTML=users.filter(u=>u.role==="student").map(u=>`<div class="listitem"><div><b>${safe(u.name)}</b><div class="small muted">${safe(u.username)} • ${safe(u.status)}</div></div><span class="pill">${safe(u.status)}</span></div>`).join("")||"No students.";
+ document.querySelectorAll("[data-approve]").forEach(b=>b.onclick=async()=>{try{await updateDoc(doc(db,"users",b.dataset.approve),{status:"approved"});msg("Student approved.","success");}catch(e){msg(e.message,"error");}});
+ },e=>msg("Student list: "+e.message,"error"));}
+function renderAdminProjectOptions(){$("manageProject").innerHTML='<option value="">Select project</option>'+projects.map(p=>`<option value="${p.id}">${safe(p.title)}</option>`).join("");}
+$("manageProject").onchange=()=>{
+ if(!isAdmin)return;const pid=$("manageProject").value;if(unsubResponses){unsubResponses();unsubResponses=null;}if(!pid){$("participants").innerHTML="";return;}
+ unsubResponses=onSnapshot(collection(db,"projects",pid,"responses"),s=>{
+  $("participants").innerHTML=s.docs.map(d=>{const r=d.data();return `<div class="listitem"><div><b>${safe(r.name||"Student")}</b><div class="small muted">${safe(r.username||"")} • ${safe(r.choice||"")}</div></div><label style="max-width:230px">Upload certificate<input type="file" accept="application/pdf,image/*" data-cert="${d.id}"></label></div>`;}).join("")||"No responses yet.";
+  document.querySelectorAll("[data-cert]").forEach(inp=>inp.onchange=async()=>{const f=inp.files[0];if(!f)return;try{const path=`certificates/${pid}/${inp.dataset.cert}/${Date.now()}_${f.name}`;const rr=ref(storage,path);await uploadBytes(rr,f);const url=await getDownloadURL(rr);await addDoc(collection(db,"users",inp.dataset.cert,"certificates"),{projectId:pid,projectTitle:projects.find(x=>x.id===pid)?.title||"Project",url,fileName:f.name,uploadedAt:serverTimestamp()});msg("Certificate uploaded to the student's account.","success");}catch(e){msg("Certificate upload failed: "+e.message,"error");}});
+ },e=>msg(e.message,"error"));
+};
 </script>
 </body></html>
