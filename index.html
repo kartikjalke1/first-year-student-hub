@@ -82,7 +82,10 @@ const ADMIN_UID = "wmPUWhoSpycD4ReHIVvh8caDmfq2";
 const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app), storage=getStorage(app);
 const $=id=>document.getElementById(id);
 let currentUser=null, profile=null, projects=[], unsubProjects=null;
-const usernameEmail=u=>u.trim().toLowerCase().replace(/[^a-z0-9._-]/g,"")+"@projecthub-login.invalid";
+const usernameEmail=u=>{
+u=u.trim().toLowerCase();
+return u.includes("@")?u:u.replace(/[^a-z0-9._-]/g,"")+"@projecthub-login.invalid";
+};
 function msg(t,kind=""){ $("message").textContent=t;$("message").className="notice "+kind; }
 function clearMsg(){ $("message").className="notice hidden"; }
 function show(id,on=true){$(id).classList.toggle("hidden",!on)}
