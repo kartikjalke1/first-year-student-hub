@@ -67,7 +67,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase
 import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {getFirestore,doc,setDoc,getDoc,collection,addDoc,query,onSnapshot,updateDoc,deleteDoc,serverTimestamp,orderBy,getDocs,writeBatch} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-const firebaseConfig={apiKey:"AIzaSyDCb4mF80vHlW1FtQIbuo3o9ESRtvlMLc",authDomain:"new-projecthub.firebaseapp.com",projectId:"new-projecthub",storageBucket:"new-projecthub.firebasestorage.app",messagingSenderId:"901069289222",appId:"1:901069289222:web:2f19a4ec67ed8294e41087"};
+const firebaseConfig={apiKey:"AIzaSyDCfB4mF80vHlW1FtQIbuo3o9ESRtvlMLc",authDomain:"new-projecthub.firebaseapp.com",projectId:"new-projecthub",storageBucket:"new-projecthub.firebasestorage.app",messagingSenderId:"901069289222",appId:"1:901069289222:web:2f19a4ec67ed8294e41087"};
 const ADMIN_UID="wmPUWhoSpycD4ReHIVvh8caDmfq2";
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
 const $=id=>document.getElementById(id);
