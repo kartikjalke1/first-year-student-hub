@@ -38,7 +38,7 @@ service cloud.firestore {
         (signedIn() && request.auth.uid == userId &&
           request.resource.data.diff(resource.data).affectedKeys()
             .hasOnly(["name", "branch", "interestedIds"]));
-      allow delete: if isAdmin();
+      allow delete: if false; // Keep every user profile record permanently. Admin can only change status.
 
       match /certificates/{certificateId} {
         allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
