@@ -1,86 +1,33 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function signedIn() {
-      return request.auth != null;
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.uid == "PASTE_YOUR_ADMIN_AUTH_UID"; }
+    function approved() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved";
     }
-    function isAdmin() {
-      return signedIn() && (
-        request.auth.uid == "wmPUWhoSpycD4ReHIVvh8caDmfq2" ||
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin"
-      );
-    }
-    function isApproved() {
-      return signedIn() &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved";
-    }
-    function projectVisible(projectId) {
-      return signedIn() && (
-        get(/databases/$(database)/documents/projects/$(projectId)).data.visibility == "public" ||
-        get(/databases/$(database)/documents/projects/$(projectId)).data.visibleTo.hasAny([request.auth.uid])
-      );
-    }
-    function isGroupMember(groupId) {
-      return signedIn() &&
-        get(/databases/$(database)/documents/groups/$(groupId)).data.members.hasAny([request.auth.uid]);
-    }
-
-    match /users/{userId} {
-      allow create: if signedIn() && request.auth.uid == userId
-        && request.resource.data.status == "pending"
-        && request.resource.data.role == "student";
-      allow read: if signedIn() && (
-        request.auth.uid == userId ||
-        isAdmin() ||
-        (isApproved() && resource.data.status == "approved")
-      );
-      allow update: if isAdmin() ||
-        (signedIn() && request.auth.uid == userId &&
-          request.resource.data.diff(resource.data).affectedKeys()
-            .hasOnly(["name", "branch", "interestedIds"]));
-      allow delete: if false; // Keep every user profile record permanently. Admin can only change status.
-
-      match /certificates/{certificateId} {
-        allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+    match /users/{uid} {
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == "student"
+        && request.resource.data.status == "pending";
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow update, delete: if isAdmin();
+      match /certificates/{certId} {
+        allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
         allow create, update, delete: if isAdmin();
       }
     }
-
     match /projects/{projectId} {
-      allow read: if isAdmin() || (isApproved() && projectVisible(projectId));
+      allow read: if approved() || isAdmin();
       allow create, update, delete: if isAdmin();
-
-      match /responses/{studentId} {
-        allow read: if isAdmin() ||
-          (signedIn() && request.auth.uid == studentId && isApproved() && projectVisible(projectId));
-        allow create: if signedIn() && request.auth.uid == studentId &&
-          isApproved() && projectVisible(projectId) &&
-          request.resource.data.uid == request.auth.uid;
-        allow update, delete: if isAdmin();
-      }
-    }
-
-    match /groups/{groupId} {
-      allow read: if isAdmin() || (isApproved() && isGroupMember(groupId));
-      allow create: if isAdmin();
-      allow update, delete: if isAdmin();
-
-      match /callPeers/{peerId} {
-        allow read: if isAdmin() || (isApproved() && isGroupMember(groupId));
-        allow create, update: if signedIn() && isApproved() &&
-          isGroupMember(groupId) && request.auth.uid == peerId;
-        allow delete: if isAdmin() || (signedIn() && request.auth.uid == peerId);
-      }
-
-      match /signals/{signalId} {
-        allow read: if isAdmin() || (isApproved() && isGroupMember(groupId));
-        allow create: if signedIn() && isApproved() && isGroupMember(groupId) &&
-          request.resource.data.from == request.auth.uid &&
-          get(/databases/$(database)/documents/groups/$(groupId)).data.members
-            .hasAny([request.resource.data.to]);
-        allow delete: if isAdmin() ||
-          (signedIn() && resource.data.to == request.auth.uid);
-        allow update: if false;
+      match /responses/{uid} {
+        allow read: if isAdmin() || (approved() && request.auth.uid == uid);
+        allow create, update: if approved() && request.auth.uid == uid
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.choice in ["interested", "not_interested"];
+        allow delete: if isAdmin() || (approved() && request.auth.uid == uid);
       }
     }
   }
